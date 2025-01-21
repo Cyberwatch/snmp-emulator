@@ -1,4 +1,4 @@
-FROM docker.io/vaporio/python:3.9-slim
+FROM python:3.13-slim
 
 RUN pip install --no-cache-dir -I snmpsim
 
@@ -8,13 +8,10 @@ RUN pip install --no-cache-dir -I snmpsim
 # basic MIBs as well - these are removed from the image since their existence
 # appears to interfere with the proper loading and usage of the .snmpwalk files
 # that we define for the emulator.
-RUN groupadd -r snmp && useradd -r -g snmp snmp \
- && mkdir -p /home/snmp/.snmpsim/variation \
- && cp -r /usr/local/snmpsim/variation/* /home/snmp/.snmpsim/variation \
- && rm -rf /usr/local/snmpsim/data \
+RUN groupadd -r snmp && useradd -m -g snmp snmp \
  && chown -R snmp:snmp /home/snmp
 
-COPY . /home/snmp
+COPY ./start_snmp_emulator.sh /home/snmp/start_snmp_emulator.sh
 
 WORKDIR /home/snmp
 USER snmp

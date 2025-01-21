@@ -76,7 +76,7 @@ if [[ ${V3_SECURITY_LEVEL} -ne authPriv ]] ; then
   exit 1
 fi
 
-python `which snmpsimd.py` \
+snmpsim-command-responder \
     --data-dir=${DATA_DIRECTORY} \
     --agent-udpv4-endpoint=0.0.0.0:${NETWORK_PORT} \
     --v3-user=simulator \

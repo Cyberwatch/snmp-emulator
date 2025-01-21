@@ -9,7 +9,9 @@ testing SNMP consumers, such as [Synse](https://synse.readthedocs.io/en/latest/)
 ## Getting
 
 ```
-docker pull vaporio/snmp-emulator
+git clone https://github.com/Cyberwatch/snmp-emulator
+cd snmp-emulator
+docker build -t snmp-emulator:latest .
 ```
 
 ## Running
@@ -34,7 +36,7 @@ The `--data-dir` argument takes a value passed to the container. This should be 
 To configure the emulator to run with data from the Pxgms (Eaton) UPS, nulling out the log file:
 
 ```
-$ docker run vaporio/snmp-emulator /snmp_data/device/ups/pxgms_ups/public.snmpwalk 1024 ../dev/null V3 authPriv SHA AES
+$ docker run snmp-emulator:latest /snmp_data/device/ups/pxgms_ups/public.snmpwalk 1024 ../dev/null V3 authPriv SHA AES
 ```
 
 The agent endpoint always uses the host `0.0.0.0` in order for the container

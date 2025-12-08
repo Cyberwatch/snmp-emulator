@@ -1,6 +1,6 @@
 FROM python:3.14-slim
 
-RUN pip install --no-cache-dir -I snmpsim
+RUN pip install --no-cache-dir -I snmpsim cryptography
 
 # The emulator needs to be run as a non-root user. The snmpsim variation
 # modules (like writecache) are installed off the search path, so copy them
